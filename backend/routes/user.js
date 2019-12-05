@@ -14,6 +14,20 @@ router.get(
   }
 );
 
+router.get(
+  "/user/:userId",
+  authController.protect,
+  authController.isAuth,
+  userController.viewProfile
+);
+
+router.put(
+  "/user/:userId",
+  authController.protect,
+  authController.isAuth,
+  userController.updateProfile
+);
+
 router.param("userId", userController.userById);
 
 module.exports = router;
