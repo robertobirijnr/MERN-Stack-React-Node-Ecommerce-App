@@ -28,6 +28,15 @@ router.delete(
   productController.remove
 );
 
+router.get("/products", productController.getAllProducts);
+router.get(
+  "/products/related/:productId",
+  productController.getRelatedProducts
+);
+router.get("/products/categories", productController.getProductsCategories);
+router.post("/products/by/search", productController.listBySearch);
+router.get("/product/photo/:productId", productController.getProductPhoto);
+
 router.param("userId", userController.userById);
 router.param("productId", productController.productById);
 module.exports = router;
