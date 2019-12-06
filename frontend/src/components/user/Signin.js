@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../Layout";
 import { Redirect } from "react-router-dom";
-import { signin,jwtToken } from "../auth/index";
+import { signin, jwtToken, isAuthenticated } from "../auth/index";
 
 const Signin = () => {
   const [values, setValues] = useState({
@@ -13,6 +13,7 @@ const Signin = () => {
   });
 
   const { email, password, error, loading, redirectToReferrer } = values;
+  const { user } = isAuthenticated();
 
   const handleChange = name => event => {
     setValues({ ...values, error: false, [name]: event.target.value });
@@ -25,13 +26,12 @@ const Signin = () => {
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
-        jwtToken(data,()=>{
+        jwtToken(data, () => {
           setValues({
             ...values,
             redirectToReferrer: true
           });
-        })
-        
+        });
       }
     });
   };
@@ -79,7 +79,11 @@ const Signin = () => {
 
   const redirectUser = () => {
     if (redirectToReferrer) {
-      return <Redirect to="/" />;
+      if (user && user.role === 1) {
+        return <Redirect to="/admin/dashboard" />;
+      } else {
+        return <Redirect to="/user/dashboard" />;
+      }
     }
   };
 
