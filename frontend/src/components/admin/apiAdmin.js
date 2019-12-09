@@ -35,7 +35,7 @@ export const createProduct = (userId, token, product) => {
   // console.log(name, email, password);
 };
 
-export const getCatrgories = () => {
+export const getCategories = () => {
   return fetch(`http://localhost:8000/api/categories`, {
     method: "GET"
   })
