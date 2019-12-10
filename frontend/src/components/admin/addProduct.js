@@ -27,13 +27,10 @@ const AddProduct = () => {
     description,
     price,
     categories,
-    category,
-    shipping,
     quantity,
     loading,
     error,
     createdProduct,
-    redirectToProfile,
     formData
   } = values;
 
@@ -132,14 +129,13 @@ const AddProduct = () => {
         <label className="text-muted">Category</label>
         <select onChange={handleChange("category")} className="form-control">
           <option>Please select</option>
-          <option value="5de80fac1f170e0074aa9903">Python</option>
-          <option value="5de80f9b1f170e0074aa9902">PHP</option>
-          {/* {categories &&
-                        categories.map((c, i) => (
-                            <option key={i} value={c._id}>
-                                {c.name}
-                            </option>
-                        ))} */}
+
+          {categories &&
+            categories.map((c, i) => (
+              <option key={i} value={c._id}>
+                {c.name}
+              </option>
+            ))}
         </select>
       </div>
 
