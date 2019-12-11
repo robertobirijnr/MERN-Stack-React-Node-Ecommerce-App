@@ -35,6 +35,7 @@ router.get(
 );
 router.get("/products/categories", productController.getProductsCategories);
 router.post("/products/by/search", productController.listBySearch);
+router.get("/products/search", productController.listSearch);
 router.get("/product/photo/:productId", productController.getProductPhoto);
 
 router.param("userId", userController.userById);

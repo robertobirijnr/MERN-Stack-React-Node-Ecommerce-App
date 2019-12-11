@@ -48,7 +48,7 @@ export const list = params => {
   const query = queryString.stringify(params)
   console.log('query',query)
   return fetch(
-    `http://localhost:8000/api/products?${query}`,
+    `http://localhost:8000/api/products/search?${query}`,
     {
       method: "GET"
     }
