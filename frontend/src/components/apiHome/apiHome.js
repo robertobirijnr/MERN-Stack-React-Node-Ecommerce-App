@@ -66,3 +66,14 @@ export const getSingleProduct = productId => {
     })
     .catch(err => console.log(err));
 };
+
+
+export const getRelatedProduct = productId => {
+  return fetch(`http://localhost:8000/api/products/related/${productId}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};

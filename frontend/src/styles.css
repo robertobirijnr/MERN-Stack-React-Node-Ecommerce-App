@@ -61,3 +61,31 @@
         background-position: 0% 50%;
     }
 }
+
+/* single product page */
+.name{
+background:indigo;
+color: #fff;
+font-weight: bold;
+
+}
+
+/* * black shade form 10-1 */ */
+.black-10 {
+    background: #f2f2f2;
+}
+.black-9 {
+    background: #e6e6e6;
+}
+.black-8 {
+    background: #d9d9d9;
+}
+.black-7 {
+    background: #cccccc;
+}
+.black-6 {
+    background: #bfbfbf;
+}
+.black-5 {
+    background: #b3b3b3;
+}
