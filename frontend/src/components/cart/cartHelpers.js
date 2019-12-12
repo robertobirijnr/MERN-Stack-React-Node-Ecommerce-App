@@ -25,3 +25,12 @@ export const itemTotal = () => {
   }
   return 0;
 };
+
+export const getCart = () => {
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("cart")) {
+      return JSON.parse(localStorage.getItem("cart"));
+    }
+  }
+  return [];
+};
