@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import ShowImage from "./showImage";
 import moment from "moment";
-import { addItem,updateItem,removeItem } from "./cart/cartHelpers";
+import { addItem, updateItem, removeItem } from "./cart/cartHelpers";
 
 const Card = ({
   product,
   cartUpdate = false,
   showViewProductButton = true,
-  showAddToCartButton = true
+  showAddToCartButton = true,
+  showRemoveButton = false
 }) => {
   const [redirect, setRedirect] = useState(false);
-  const [count, setCount] = useState(product.count)
+  const [count, setCount] = useState(product.count);
 
   const showViewButton = showViewProductButton => {
     return (
@@ -50,6 +51,19 @@ const Card = ({
     );
   };
 
+  const removeButton = showRemoveButton => {
+    return (
+      showRemoveButton && (
+        <button
+          onClick={() => removeItem(product._id)}
+          className="btn btn-outline-danger mt-2 mb-2"
+        >
+          Remove Product
+        </button>
+      )
+    );
+  };
+
   const showStock = quantity => {
     return quantity > 0 ? (
       <span className="badge badge-primary badge-pill">In stock</span>
@@ -58,26 +72,31 @@ const Card = ({
     );
   };
 
-  const handleChange =(productId)=>event=>{
-    setCount(event.target.value < 1 ? 1: event.target.value)
-    if(event.target.value >= 1){
-      updateItem(productId,event.target.value)
+  const handleChange = productId => event => {
+    setCount(event.target.value < 1 ? 1 : event.target.value);
+    if (event.target.value >= 1) {
+      updateItem(productId, event.target.value);
     }
-  }
+  };
 
   const showCartUpdateOption = cartUpdate => {
-    return cartUpdate && <div>
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          <span className="input-group-text">Adjust Quantity</span>
+    return (
+      cartUpdate && (
+        <div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">Adjust Quantity</span>
+            </div>
+            <input
+              className="form-control"
+              type="number"
+              value={count}
+              onChange={handleChange(product._id)}
+            ></input>
+          </div>
         </div>
-       <input className="form-control" type="number" 
-       value={count}
-        onChange={handleChange(product._id)}>
-
-       </input>
-      </div>
-    </div>;
+      )
+    );
   };
 
   return (
@@ -97,6 +116,7 @@ const Card = ({
         {showViewButton(showViewProductButton)}
 
         {addToCartButton(showAddToCartButton)}
+        {removeButton(showRemoveButton)}
         {showCartUpdateOption(cartUpdate)}
       </div>
     </div>

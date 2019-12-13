@@ -37,7 +37,7 @@ const Menu = ({ history }) => (
           Cart{" "}
           <sup>
             <small className="badge badge-warning">
-              <i class="fas fa-shopping-cart">{itemTotal()}</i>
+              <i className="fas fa-shopping-cart">{itemTotal()}</i>
             </small>{" "}
           </sup>
         </Link>
