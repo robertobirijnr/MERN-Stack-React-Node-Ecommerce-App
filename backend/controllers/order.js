@@ -1,3 +1,16 @@
+const { Order, CartItem } = require("../models/order");
+const { errorHandler } = require("../helpers/dbErrorHandler");
+
 exports.createOrder = (req, res) => {
-  console.log("create Order:", req.body);
+  console.log("CREATE ORDER: ", req.body);
+  req.body.order.User = req.profile;
+  const order = new Order(req.body.order);
+  order.save((error, data) => {
+    if (error) {
+      return res.status(400).json({
+        error: errorHandler(error)
+      });
+    }
+    res.json(data);
+  });
 };

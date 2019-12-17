@@ -83,7 +83,7 @@ const Checkout = ({ products }) => {
             setData({ ...data, success: response.success });
             emptyCart(() => {
               console.log("payment success and empty cart");
-              setData({ loading: false });
+              setData({ loading: false ,success:true});
             });
           })
           .catch(error => {
