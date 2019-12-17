@@ -10,6 +10,13 @@ router.get(
   authController.isAuth,
   braintreeController.generateToken
 );
+
+router.post(
+  "/braintree/payment/:userId",
+  authController.protect,
+  authController.isAuth,
+  braintreeController.processPayment
+);
 router.param("userId", userController.userById);
 
 module.exports = router;

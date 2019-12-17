@@ -18,3 +18,25 @@ exports.generateToken = (req, res) => {
     }
   });
 };
+
+exports.processPayment = (req, res) => {
+  let nonceFromTheClient = req.body.paymentMethodNonce;
+  let amountFromClient = req.body.amount;
+
+  let newTransaction = getway.transaction.sale(
+    {
+      amount: amountFromClient,
+      paymentMethodNonce: nonceFromTheClient,
+      options: {
+        submitForsettlement: true
+      }
+    },
+    (error, result) => {
+      if (error) {
+        res.status(500).json(error);
+      } else {
+        res.json(result);
+      }
+    }
+  );
+};
