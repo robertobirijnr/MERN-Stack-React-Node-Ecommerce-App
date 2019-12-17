@@ -67,7 +67,6 @@ export const getSingleProduct = productId => {
     .catch(err => console.log(err));
 };
 
-
 export const getRelatedProduct = productId => {
   return fetch(`http://localhost:8000/api/products/related/${productId}`, {
     method: "GET"
@@ -78,14 +77,13 @@ export const getRelatedProduct = productId => {
     .catch(err => console.log(err));
 };
 
-
-export const getBraintreeClientToken = (userId,token)=> {
+export const getBraintreeClientToken = (userId, token) => {
   return fetch(`http://localhost:8000/api/braintree/getToken/${userId}`, {
     method: "GET",
-    headers:{
-      Accept:'application/json',
-      'Content-Type':'application/json',
-      Authorization:`Bearer ${token}`
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     }
   })
     .then(response => {
@@ -94,18 +92,34 @@ export const getBraintreeClientToken = (userId,token)=> {
     .catch(err => console.log(err));
 };
 
-export const processPayment = (userId,token,paymentData)=> {
+export const processPayment = (userId, token, paymentData) => {
   return fetch(`http://localhost:8000/api/braintree/payment/${userId}`, {
     method: "POST",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(paymentData)
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(paymentData)
+  })
+    .then(response => {
+      return response.json();
     })
-        .then(response => {
-            return response.json();
-        })
-        .catch(err => console.log(err));
+    .catch(err => console.log(err));
+};
+
+export const createOrder = (userId, token, createOrderData) => {
+  return fetch(`http://localhost:8000/api/order/create/${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ oder: createOrderData })
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
 };
