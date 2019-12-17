@@ -58,7 +58,10 @@ const Checkout = ({ products }) => {
           amount: getTotal(products)
         };
         processPayment(userId, token, paymentData)
-          .then(response => console.log(response))
+          .then(response => {
+            // console.log(response)
+            setData({...data,success:response.success})
+          })
           .catch(error => console.log(error));
       })
       .catch(error => {
@@ -72,6 +75,15 @@ const Checkout = ({ products }) => {
       style={{ display: error ? "" : "none" }}
     >
       {error}
+    </div>
+  );
+
+  const showSuccess = success => (
+    <div
+      className="alert alert-info"
+      style={{ display: success ? "" : "none" }}
+    >
+      Thanks your payment was successful
     </div>
   );
 
@@ -97,6 +109,7 @@ const Checkout = ({ products }) => {
     <div>
       <h2>Total:${getTotal()}</h2>
       <hr />
+      {showSuccess (data.success)}
       {showError(data.error)}
       {showCheckout()}
     </div>
