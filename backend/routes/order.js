@@ -14,6 +14,14 @@ router.post(
   orderController.createOrder
 );
 
+router.get(
+  "/order/list/:userId",
+  authController.protect,
+  authController.isAuth,
+  authController.isAdmin,
+  orderController.getOrders
+);
+
 router.param("userId", userController.userById);
 
 module.exports = router;

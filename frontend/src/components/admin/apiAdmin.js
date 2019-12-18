@@ -44,3 +44,18 @@ export const getCategories = () => {
     })
     .catch(err => console.log(err));
 };
+
+export const getOrders = (userId,token) => {
+  return fetch(`http://localhost:8000/api/order/list/${userId}`, {
+    method: "GET", 
+    headers: {
+      Accept: "Application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
