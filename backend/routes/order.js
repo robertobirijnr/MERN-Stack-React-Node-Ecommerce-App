@@ -8,6 +8,7 @@ router.post(
   "/order/create/:userId",
   authController.protect,
   authController.isAuth,
+  userController.userOrderHistory,
   orderController.createOrder
 );
 
