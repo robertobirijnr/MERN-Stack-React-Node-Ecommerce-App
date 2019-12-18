@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Layout";
 import { isAuthenticated } from "../auth";
-// import { Link } from 'react-router-dom';
-import { getOrders, getStatusValues } from "./apiAdmin";
+import { getOrders, getStatusValues, updateOrderStatus } from "./apiAdmin";
 import moment from "moment";
 
 const Orders = () => {
@@ -55,7 +54,13 @@ const Orders = () => {
   );
 
   const handleStatusChange = (e, orderId) => {
-    console.log("update oderes status");
+    updateOrderStatus(user._id, token, orderId, e.target.value).then(data => {
+      if (data.error) {
+        console.log("Status Update failed");
+      } else {
+        loadOrders();
+      }
+    });
   };
 
   const showStatus = o => (
@@ -79,7 +84,7 @@ const Orders = () => {
     <Layout title="Orders" description={`Hey Welcome ${user.name}`}>
       <div className="row">
         <div className="col-md-8 offset-md-2">
-          {showOrders(orders)}
+          {showOrders()}
           {orders.map((o, oIndex) => {
             return (
               <div

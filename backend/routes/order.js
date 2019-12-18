@@ -30,6 +30,17 @@ router.get(
   orderController.getStatusValue
 );
 
+router.put(
+  "/order/:orderId/status/:userId",
+  authController.protect,
+  authController.isAuth,
+  authController.isAdmin,
+  orderController.updateOrderStatus
+);
+
+
+
 router.param("userId", userController.userById);
+router.param("orderId", orderController.orderById);
 
 module.exports = router;
