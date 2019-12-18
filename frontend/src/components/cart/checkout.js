@@ -56,6 +56,8 @@ const Checkout = ({ products }) => {
     );
   };
 
+  let deliveryAddress = data.address
+
   const buy = () => {
     setData({ loading: true });
     let nonce;
@@ -75,7 +77,7 @@ const Checkout = ({ products }) => {
               products: products,
               transaction_id: response.transaction.id,
               amount: response.transaction.amount,
-              address: data.address
+              address: deliveryAddress
             };
 
             createOrder(userId, token, createOrderData);
