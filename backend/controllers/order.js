@@ -28,3 +28,7 @@ exports.getOrders = (req, res) => {
       res.json(orders);
     });
 };
+
+exports.getStatusValue = (req,res) => {
+  res.json(Order.schema.path("status").enumValues);
+};

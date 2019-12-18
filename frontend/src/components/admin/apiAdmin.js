@@ -59,3 +59,18 @@ export const getOrders = (userId,token) => {
     .catch(err => console.log(err));
 };
 
+export const getStatusValues = (userId,token) => {
+  return fetch(`http://localhost:8000/api/order/status/${userId}`, {
+    method: "GET", 
+    headers: {
+      Accept: "Application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+
