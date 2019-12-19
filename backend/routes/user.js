@@ -27,6 +27,12 @@ router.put(
   authController.isAuth,
   userController.updateProfile
 );
+router.get(
+  "/orders/by/user/:userId",
+  authController.protect,
+  authController.isAuth,
+  userController.getPurchasedHistory
+);
 
 router.param("userId", userController.userById);
 
