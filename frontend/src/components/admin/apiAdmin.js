@@ -89,4 +89,53 @@ export const updateOrderStatus = (userId,token,orderId,status) => {
     .catch(err => console.log(err));
 };
 
+export const getProducts = () => {
+  return fetch(`http://localhost:8000/api/products`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
 
+export const deleteProduct = (productId,token,userId) => {
+  return fetch(`http://localhost:8000/api/product/${productId}/${userId}`, {
+    method: "DELETE", 
+    headers: {
+      Accept: "Application/json",
+      "Content-Type":'application/json',
+      Authorization: `Bearer ${token}`
+    },
+  
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const getProduct = (productId) => {
+  return fetch(`http://localhost:8000/api/product/${productId}`, {
+    method: "GET"
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+export const updateProduct = (productId,token,userId,product) => {
+  return fetch(`http://localhost:8000/api/product/${productId}/${userId}`, {
+    method: "PUT", 
+    headers: {
+      Accept: "Application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body:product
+  })
+    .then(response => {
+      return response.json();
+    })
+  }
+   
