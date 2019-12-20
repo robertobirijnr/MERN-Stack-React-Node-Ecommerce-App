@@ -90,7 +90,7 @@ export const updateOrderStatus = (userId,token,orderId,status) => {
 };
 
 export const getProducts = () => {
-  return fetch(`http://localhost:8000/api/products`, {
+  return fetch(`http://localhost:8000/api/products?limit=100`, {
     method: "GET"
   })
     .then(response => {
